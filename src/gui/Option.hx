@@ -15,8 +15,11 @@ class Option extends Entity {
 		this.visible = visible;
 		
 		graphic = optionText;
+		graphic.x = -optionText.textWidth/2;
+		graphic.y = -optionText.textHeight/2;
 							
-		setHitboxTo(graphic);
+		setHitbox(optionText.textWidth, optionText.textHeight, 0, 0);
+		centerOrigin();
 		type = "option";
 	}
 	

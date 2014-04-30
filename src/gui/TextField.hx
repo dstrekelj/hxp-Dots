@@ -15,8 +15,11 @@ class TextField extends Entity {
 		this.visible = visible;
 		
 		graphic = textFieldText;
-					
-		setHitboxTo(graphic);
+		graphic.x = -textFieldText.textWidth/2;
+		//graphic.y = -textFieldText.textHeight/2;
+		
+		setHitbox(textFieldText.textWidth, textFieldText.textHeight, Std.int(textFieldText.textWidth/2), 0);
+		//centerOrigin();
 		type = "textfield";
 	}
 	
