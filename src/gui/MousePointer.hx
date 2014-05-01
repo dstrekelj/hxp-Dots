@@ -10,7 +10,7 @@ class MousePointer extends Entity {
 	public function new ( x : Int, y : Int ) : Void {
 		super(x, y);
 		
-		image = Image.createCircle(5, 0xffffff, 0x000000);
+		image = Image.createCircle(5, 0xffffff);
 		image.centerOrigin();
 		graphic = image;
 		
