@@ -10,7 +10,7 @@ class MousePointer extends Entity {
 	public function new ( x : Int, y : Int ) : Void {
 		super(x, y);
 		
-		image = Image.createCircle(5, 0xffffff);
+		image = Image.createCircle(5, 0xffffff, 0x000000);
 		image.centerOrigin();
 		graphic = image;
 		
@@ -27,10 +27,17 @@ class MousePointer extends Entity {
 	
 	public function handle ( option : Option ) : Bool {
 		var e : Entity = collideWith(option, x, y);
-		
+
+#if android
+		if (e != null) {
+			return true;
+		}
+#else
 		if (e != null && Input.mousePressed) {
 			return true;
-		} else {
+		}
+#end
+		else {
 			return false;
 		}
 	}
