@@ -5,7 +5,8 @@ import com.haxepunk.graphics.Text;
 
 class Option extends Entity {
 	private var optionText : Text;
-	
+	private var alignment : String;
+
 	public function new ( x : Float, 
 						  y : Float, 
 						  text : String,
@@ -20,7 +21,8 @@ class Option extends Entity {
 		
 		graphic = optionText;
 		
-		setAlignment(align);
+		alignment = align;
+		setAlignment(alignment);
 		type = "option";
 		
 		this.visible = visible;
@@ -28,6 +30,7 @@ class Option extends Entity {
 	
 	public function setText ( newText : String ) : Void {
 		optionText.text = newText;
+		setAlignment(alignment);
 	}
 	
 	public function setAlignment ( newAlignment : String ) : Void {

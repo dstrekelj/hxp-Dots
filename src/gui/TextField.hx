@@ -5,6 +5,7 @@ import com.haxepunk.graphics.Text;
 
 class TextField extends Entity {
 	private var textFieldText : Text;
+	private var alignment : String;
 	
 	public function new ( x : Float, 
 						  y : Float, 
@@ -20,7 +21,8 @@ class TextField extends Entity {
 		
 		graphic = textFieldText;
 		
-		setAlignment(align);
+		alignment = align;
+		setAlignment(alignment);
 		type = "textfield";
 		
 		this.visible = visible;
@@ -28,6 +30,7 @@ class TextField extends Entity {
 	
 	public function setText ( newText : String ) : Void {
 		textFieldText.text = newText;
+		setAlignment(alignment);
 	}
 	
 	public function setAlignment ( newAlignment : String ) : Void {

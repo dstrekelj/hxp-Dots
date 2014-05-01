@@ -24,6 +24,9 @@ class GameScene extends Scene {
 	private var mousePointer : gui.MousePointer;
 	private var optionMenu : gui.Option;
 	private var optionTryAgain : gui.Option;
+	private var txtfieldGameOver : gui.TextField;
+	//private var txtfieldScore : gui.TextField;
+	private var txtfieldScores : gui.TextField;
 	
 	private var so : SharedObject;
 	
@@ -50,8 +53,11 @@ class GameScene extends Scene {
 		quitTimer = 0;
 		
 		mousePointer = new gui.MousePointer(0, 0);
-		optionMenu = new gui.Option(10, HXP.height-34, "BACK TO TITLE SCREEN", 24, false);
-		optionTryAgain = new gui.Option(10, 124, "TRY AGAIN", 24, false);
+		optionMenu = new gui.Option(HXP.width-12, 12, "MENU", 48, "top-right", false);
+		optionTryAgain = new gui.Option(HXP.width-12, HXP.height-12, "AGAIN", 48, "bottom-right", false);
+		txtfieldGameOver = new gui.TextField(HXP.width/2, HXP.height/2-40, "YOU DIED", 64, "top", false);
+		//txtfieldScore = new gui.TextField(HXP.width/2, 12, "SCORE: ", 48, "top", true);
+		txtfieldScores = new gui.TextField(HXP.width/2, HXP.height/2+16, "SCORE: ", 16, "top", false);
 		
 		Input.define( "jump", [Key.UP, Key.W, Key.SPACE] );
 	}
@@ -70,6 +76,10 @@ class GameScene extends Scene {
 		add ( mousePointer );
 		add ( optionMenu );
 		add ( optionTryAgain );
+		add ( txtfieldGameOver );
+		//add ( txtfieldScore );
+		add ( txtfieldScores );
+		
 		add ( textScore );
 		add ( textInstructions );
 		add ( player );
@@ -80,32 +90,7 @@ class GameScene extends Scene {
 	override public function update () {
 		setup();
 		
-		if ( player.isDestroyed ) {
-			quitTimer += HXP.elapsed;
-			
-			recordScore();
-			
-			textScore.visible = false;
-			optionMenu.visible = true;
-			optionTryAgain.visible = true;
-			textInstructions.visible = true;
-			textInstructions.setText("YOU DIED" +
-									 "\nSCORE: " + textScore.getScore() +
-									 "\nBEST: " + so.data.sessionbest +
-									 "\nALL-TIME: " + so.data.score);
-			
-			if (mousePointer.handle(optionMenu)) {
-				HXP.scene = new scenes.TitleScene();
-			}else if (mousePointer.handle(optionTryAgain)) {
-				HXP.scene = new scenes.GameScene();
-			}
-				
-			/*if (quitTimer >= 0.5) {
-				if ( Input.pressed( "jump" ) || Input.mousePressed ) {
-					HXP.scene = new GameScene();
-				}
-			}*/
-		}
+		showScoreboard();
 						
 		super.update();
 	}
@@ -150,14 +135,6 @@ class GameScene extends Scene {
 			trace("SharedObject error: " + error);
 		}
 			
-		/*if ( so.data.score == null ) {
-			so.data.score = 0;
-			so.flush();
-		} else if ( textScore.getScore() > Std.int(so.data.score) ) {
-			so.data.score = textScore.getScore();
-			so.flush();
-		}*/
-		
 		if ( textScore.getScore() > Std.int(so.data.sessionbest) ) {
 			so.data.sessionbest = textScore.getScore();
 			so.flush();
@@ -166,6 +143,31 @@ class GameScene extends Scene {
 		if ( textScore.getScore() > Std.int(so.data.score) ) {
 			so.data.score = textScore.getScore();
 			so.flush();
+		}
+	}
+	
+	private function showScoreboard () : Void {
+		if (player.isDestroyed){
+			quitTimer += HXP.elapsed;
+			
+			recordScore();
+			
+			textScore.visible = false;
+			
+			optionMenu.visible = true;
+			optionTryAgain.visible = true;
+			txtfieldGameOver.visible = true;
+					
+			txtfieldScores.setText("SCORE: " + textScore.getScore() +
+								   " (BEST: " + so.data.sessionbest +
+								   ", ALL-TIME: " + so.data.score + ")");
+			txtfieldScores.visible = true;
+			
+			if (mousePointer.handle(optionMenu)) {
+				HXP.scene = new scenes.TitleScene();
+			} else if (mousePointer.handle(optionTryAgain) && quitTimer >= 0.5) {
+				HXP.scene = new scenes.GameScene();
+			}
 		}
 	}
 }

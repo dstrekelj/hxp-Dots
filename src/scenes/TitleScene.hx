@@ -18,8 +18,8 @@ class TitleScene extends Scene {
 		mousePointer = new gui.MousePointer(0, 0);
 		titleText = new gui.TextField(HXP.width/2, HXP.height/2-40, "TOCHKA", 64, "top");
 		madeBy = new gui.TextField(HXP.width/2, HXP.height/2+16, "BY DOMAGOJ STREKELJ", 16, "top");
-		optionStart = new gui.Option(HXP.width-24, HXP.height-24, "START", 48, "bottom-right");
-		optionQuit = new gui.Option(HXP.width-24, 24, "QUIT", 48, "top-right");
+		optionStart = new gui.Option(HXP.width-12, HXP.height-12, "START", 48, "bottom-right");
+		optionQuit = new gui.Option(HXP.width-12, 12, "QUIT", 48, "top-right");
 	}
 	
 	override public function begin () : Void {

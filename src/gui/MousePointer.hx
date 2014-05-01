@@ -20,7 +20,15 @@ class MousePointer extends Entity {
 	}
 	
 	override public function update () : Void {
+#if android
+		if (Input.mousePressed) {
+			moveTo(Input.mouseX, Input.mouseY);
+		} else {
+			moveTo(-1, -1);
+		}
+#else
 		moveTo(Input.mouseX, Input.mouseY);
+#end
 		
 		super.update();
 	}
