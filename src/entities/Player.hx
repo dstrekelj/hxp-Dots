@@ -32,7 +32,9 @@ class Player extends Entity {
 		velocity = 0;
 		// Set up Player entity graphic, hitbox, collision type
 		graphic = Image.createCircle(20, 0xE0E0D0, 100);
-		setHitbox(30, 30, -5, -5);
+		graphic.x = -20;
+		graphic.y = -20;
+		setHitbox(30, 30, 15, 15);
 		type = "player";
 		// Set up sound effects
 		sfxJump = new Sfx( "audio/jump.wav" );

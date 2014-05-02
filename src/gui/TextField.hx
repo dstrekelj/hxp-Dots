@@ -5,24 +5,26 @@ import com.haxepunk.graphics.Text;
 
 class TextField extends Entity {
 	private var textFieldText : Text;
-	private var alignment : String;
+	private var textFieldOrigin : String;
 	
 	public function new ( x : Float, 
 						  y : Float, 
 						  text : String,
 						 ?size : Int = 16,
-						 ?align : String = "top-left",
+						 ?align : String = "left",
+						 ?origin : String = "top-left",
 						 ?visible : Bool = true
 						) : Void {
 		super(x, y);
 		
 		textFieldText = new Text(text);
-		textFieldText.size = size;
-		
+		textFieldText.size = size;		
+		textFieldText.align = align;
 		graphic = textFieldText;
 		
-		alignment = align;
-		setAlignment(alignment);
+		textFieldOrigin = origin;
+		setTextOrigin(textFieldOrigin);
+		
 		type = "textfield";
 		
 		this.visible = visible;
@@ -30,11 +32,11 @@ class TextField extends Entity {
 	
 	public function setText ( newText : String ) : Void {
 		textFieldText.text = newText;
-		setAlignment(alignment);
+		setTextOrigin(textFieldOrigin);
 	}
 	
-	public function setAlignment ( newAlignment : String ) : Void {
-		switch (newAlignment) {
+	public function setTextOrigin ( newOrigin : String ) : Void {
+		switch (newOrigin) {
 		case "top-left":
 			graphic.x = 0;
 			graphic.y = 0;
@@ -72,6 +74,8 @@ class TextField extends Entity {
 			graphic.y = -textFieldText.textHeight;
 			setHitbox(textFieldText.textWidth, textFieldText.textHeight, textFieldText.textWidth, textFieldText.textHeight);
 		default :
+			graphic.x = 0;
+			graphic.y = 0;
 			setHitboxTo(graphic);
 		}
 	}

@@ -24,8 +24,9 @@ class GameScene extends Scene {
 	private var mousePointer : gui.MousePointer;
 	private var optionMenu : gui.Option;
 	private var optionRestart : gui.Option;
-	private var txtfieldGameOver : gui.TextField;
 	//private var txtfieldScore : gui.TextField;
+	private var txtfieldInstructions : gui.TextField;
+	private var txtfieldGameOver : gui.TextField;
 	private var txtfieldScores : gui.TextField;
 	
 	private var so : SharedObject;
@@ -34,8 +35,8 @@ class GameScene extends Scene {
 		super ();
 			
 		//Declaring the entities
-		player = new Player ( 150, HXP.halfHeight );
-		textScore = new GameScore ( HXP.width-140, 10, false );
+		player = new Player ( 100, HXP.halfHeight );
+		textScore = new GameScore ( HXP.width/2, 24, false );/*
 #if mobile
 		textInstructions = new Instructions ( 10, 10, "DODGE OBSTACLES." +
 											 "\nSTAY INSIDE THE SCREEN." +
@@ -46,27 +47,41 @@ class GameScene extends Scene {
 											 "\nSTAY INSIDE THE SCREEN." +
 											 "\nJUMP: LCLICK, SPACE, W, UP." +
 											 "\nJUMP TO CONTINUE.", true );
-#end
+#end*/
 		//Declaring the variables
 		restart = false;
 		spawnTimer = 0;
 		quitTimer = 0;
 		
 		mousePointer = new gui.MousePointer(0, 0);
-#if mobile	
-		txtfieldGameOver = new gui.TextField(HXP.width/2, HXP.height/2-40, "YOU DIED", 64, "top", false);
-		txtfieldScores = new gui.TextField(HXP.width/2, HXP.height/2+16, "SCORE: ", 16, "top", false);
+
+		//txtfieldScore = new gui.TextField(HXP.width/2, 24, "SCORE: ", 24, "top", false);
+		
+#if mobile
+		txtfieldInstructions = new gui.TextField(HXP.width/2, HXP.height/2, 
+												 "STAY ALIVE" +
+												 "\nTOUCH TO JUMP",
+												 24, "center", "center", true
+												);
+		txtfieldGameOver = new gui.TextField(HXP.width/2, HXP.height/2-40, "YOU DIED", 64, "center", "top", false);
+		txtfieldScores = new gui.TextField(HXP.width/2, HXP.height/2+16, "SCORE: ", 16, "center", "top", false);
 		optionMenu = new gui.Option(HXP.width-12, 12, "MENU", 48, "top-right", false);
 		optionRestart = new gui.Option(HXP.width-12, HXP.height-12, "RESTART", 48, "bottom-right", false);
 #else
-		txtfieldGameOver = new gui.TextField(HXP.width/2, HXP.height/2-32, "YOU DIED", 64, "bottom", false);
-		txtfieldScores = new gui.TextField(HXP.width/2, HXP.height/2-24, "SCORE: ", 16, "bottom", false);	
+		txtfieldInstructions = new gui.TextField(HXP.width/2, HXP.height/2, 
+												 "STAY ALIVE" +
+												 "\nLCLICK/SPACE/W/UP" +
+												 "\nTO JUMP",
+												 24, "center", "center", true
+												);
+		txtfieldGameOver = new gui.TextField(HXP.width/2, HXP.height/2-32, "YOU DIED", 64, "center", "bottom", false);
+		txtfieldScores = new gui.TextField(HXP.width/2, HXP.height/2-24, "SCORE: ", 16, "center", "bottom", false);	
 		optionRestart = new gui.Option(HXP.width/2, HXP.height/2+24, "RESTART", 32, "top", false);	
 		optionMenu = new gui.Option(HXP.width/2, HXP.height/2+88, "MENU", 32, "top", false);
 #end	
-		//txtfieldScore = new gui.TextField(HXP.width/2, 12, "SCORE: ", 48, "top", true);
 		
-		Input.define( "jump", [Key.UP, Key.W, Key.SPACE] );
+		Input.define( "jump", [Key.UP, Key.W, Key.SPACE, Key.ENTER] );
+		Input.define( "exit", [Key.ESCAPE, Key.BACKSPACE] );
 	}
 	
 	override public function begin () {
@@ -83,12 +98,13 @@ class GameScene extends Scene {
 		add ( mousePointer );
 		add ( optionMenu );
 		add ( optionRestart );
+		add ( txtfieldInstructions );
 		add ( txtfieldGameOver );
 		//add ( txtfieldScore );
 		add ( txtfieldScores );
 		
 		add ( textScore );
-		add ( textInstructions );
+		//add ( textInstructions );
 		add ( player );
 		
 		super.begin();
@@ -119,8 +135,13 @@ class GameScene extends Scene {
 	private function setup () : Void {
 		if (player.isReady) {
 			textScore.visible = true;
-			textInstructions.visible = false;
+			//textInstructions.visible = false;
+			
+			txtfieldInstructions.visible = false;
+			//txtfieldScore.visible = true;
+			
 			spawn();
+			
 			if ( !player.isDestroyed ) {
 				textScore.addScore();
 			}
@@ -167,14 +188,21 @@ class GameScene extends Scene {
 					
 			txtfieldScores.setText("SCORE: " + textScore.getScore() +
 								   " (BEST: " + so.data.sessionbest +
-								   ", ALL-TIME: " + so.data.score + ")");
+								   " / ALL-TIME: " + so.data.score + ") ");
 			txtfieldScores.visible = true;
-			
+#if mobile
 			if (mousePointer.handle(optionMenu)) {
 				HXP.scene = new scenes.TitleScene();
 			} else if (mousePointer.handle(optionRestart) && quitTimer >= 0.5) {
 				HXP.scene = new scenes.GameScene();
 			}
+#else
+			if (mousePointer.handle(optionMenu) || Input.pressed("exit")) {
+				HXP.scene = new scenes.TitleScene();
+			} else if ((mousePointer.handle(optionRestart) || Input.pressed("jump")) && quitTimer >= 0.5) {
+				HXP.scene = new scenes.GameScene();
+			}
+#end
 		}
 	}
 }

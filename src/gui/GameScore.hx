@@ -8,18 +8,20 @@ class GameScore extends Entity {
 	private var textScore : Text;
 	private var score : Float;
 	
-	public function new ( x : Int, y : Int, visible : Bool ) {
+	public function new ( x : Float, y : Float, visible : Bool ) {
 		super( x, y );
 		
 		textScore = new Text("SCORE: 0");
 #if (html5 || flash)
-		textScore.align = flash.text.TextFormatAlign.LEFT;
+		textScore.align = flash.text.TextFormatAlign.CENTER;
 #else
-		textScore.align = "left";
+		textScore.align = "center";
 #end
 		textScore.size = 24;
 		
 		graphic = textScore;
+		graphic.x = -textScore.textWidth/2;
+		graphic.y = 0;
 		layer = 0;
 		score = 0;
 		
