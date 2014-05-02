@@ -36,6 +36,7 @@ class Obstacle extends Entity {
 	}
 	
 	public function destroy () : Void {
+		graphic.destroy();
 		scene.remove( this );
 	}
 }

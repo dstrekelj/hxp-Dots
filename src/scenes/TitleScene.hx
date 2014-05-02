@@ -15,11 +15,18 @@ class TitleScene extends Scene {
 	public function new () : Void {
 		super();
 		
-		mousePointer = new gui.MousePointer(0, 0);
+		mousePointer = new gui.MousePointer(0, 0);	
+#if mobile
 		titleText = new gui.TextField(HXP.width/2, HXP.height/2-40, "TOCHKA", 64, "top");
 		madeBy = new gui.TextField(HXP.width/2, HXP.height/2+16, "BY DOMAGOJ STREKELJ", 16, "top");
+		optionQuit = new gui.Option(HXP.width-12, 12, "QUIT", 48, "top-right");	
 		optionStart = new gui.Option(HXP.width-12, HXP.height-12, "START", 48, "bottom-right");
-		optionQuit = new gui.Option(HXP.width-12, 12, "QUIT", 48, "top-right");
+#else
+		titleText = new gui.TextField(HXP.width/2, HXP.height/2-32, "TOCHKA", 64, "bottom");
+		madeBy = new gui.TextField(HXP.width/2, HXP.height/2-24, "BY DOMAGOJ STREKELJ", 16, "bottom");
+		optionStart = new gui.Option(HXP.width/2, HXP.height/2+24, "START", 32, "top");
+		optionQuit = new gui.Option(HXP.width/2, HXP.height/2+88, "QUIT", 32, "top");	
+#end
 	}
 	
 	override public function begin () : Void {

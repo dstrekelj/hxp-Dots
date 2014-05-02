@@ -20,7 +20,7 @@ class MousePointer extends Entity {
 	}
 	
 	override public function update () : Void {
-#if android
+#if mobile
 		if (Input.mousePressed) {
 			moveTo(Input.mouseX, Input.mouseY);
 		} else {
@@ -36,7 +36,7 @@ class MousePointer extends Entity {
 	public function handle ( option : Option ) : Bool {
 		var e : Entity = collideWith(option, x, y);
 
-#if android
+#if mobile
 		if (e != null) {
 			return true;
 		}
