@@ -59,7 +59,7 @@ class GameScene extends Scene {
 		
 #if mobile
 		txtfieldInstructions = new gui.TextField(HXP.width/2, HXP.height/2, 
-												 "STAY ALIVE" +
+												 "AVOID COLLISION" +
 												 "\nTOUCH TO JUMP",
 												 24, "center", "center", true
 												);
@@ -69,7 +69,7 @@ class GameScene extends Scene {
 		optionRestart = new gui.Option(HXP.width-12, HXP.height-12, "RESTART", 48, "bottom-right", false);
 #else
 		txtfieldInstructions = new gui.TextField(HXP.width/2, HXP.height/2, 
-												 "STAY ALIVE" +
+												 "AVOID COLLISION" +
 												 "\nLCLICK/SPACE/W/UP" +
 												 "\nTO JUMP",
 												 24, "center", "center", true
