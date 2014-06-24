@@ -6,12 +6,23 @@ import com.haxepunk.utils.Input;
 import com.haxepunk.utils.Key;
 
 class TitleScene extends Scene {
+	/*	The following private variables relate to the game's GUI.
+	**
+	**	The MousePointer class extends Entity and selected options
+	**	are detected through collision with the Option class (also
+	**	extending Entity). This	was done for easier implementation
+	**	of the system on mobile targets.
+	**
+	**	The TextField class is the same as the Option class with
+	**	the difference being a lack of collision detection.
+	*/
 	private var mousePointer : gui.MousePointer;
 	private var optionStart : gui.Option;
 	private var optionQuit : gui.Option;
 	private var titleText : gui.TextField;
 	private var madeBy : gui.TextField;
-	
+	/*	A timer for the obstacles spawning in the background.
+	*/
 	private var spawnTimer : Float = 0;
 	
 	public function new () : Void {

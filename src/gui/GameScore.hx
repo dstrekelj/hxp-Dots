@@ -8,7 +8,7 @@ class GameScore extends Entity {
 	private var textScore : Text;
 	private var score : Float;
 	
-	public function new ( x : Float, y : Float, visible : Bool ) {
+	public function new ( x : Float, y : Float, visible : Bool ) : Void {
 		super( x, y );
 		
 		textScore = new Text("SCORE: 0");

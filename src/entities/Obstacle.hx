@@ -4,17 +4,17 @@ import com.haxepunk.Entity;
 import com.haxepunk.graphics.Image;
 
 class Obstacle extends Entity {
-	private var acceleration : Float;
 	private var velocity : Float;
+	private var velocityFactor : Float;
 	
-	public function new ( x : Float, y : Float, acceleration : Float ) {
+	public function new ( x : Float, y : Float, velocityFactor : Float ) {
 		super( x, y );
 		
 		graphic = Image.createCircle( 20, 0x44BBFF, 100 );
 		setHitbox(30, 30, -5, -5);
 		type = "obstacle";
 		
-		this.acceleration = acceleration;
+		this.velocityFactor = velocityFactor;
 		velocity = 7;
 		layer = 1;
 	}
@@ -22,7 +22,7 @@ class Obstacle extends Entity {
 	private function move () : Void {
 		var speed : Float = 0;
 		
-		speed = -1 * (velocity + (velocity * acceleration));
+		speed = -1 * (velocity + (velocity * velocityFactor));
 		
 		moveBy(speed, 0);
 	}
