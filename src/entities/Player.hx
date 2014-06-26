@@ -7,121 +7,89 @@ import com.haxepunk.graphics.Image;
 import com.haxepunk.utils.Input;
 import com.haxepunk.utils.Key;
 
-class Player extends Entity
-{
-	/*	This set of variables describes player movement.
-	 */
+class Player extends Entity {
+	// These affect movement
 	private var acceleration : Float;
 	private var gravity : Float;
 	private var velocity : Float;
-	
-	/*	This set of variables handles sound effects.
-	 */
+	// This handles the "jump" sound effect
 	private var sfxJump : Sfx;
 	private var sfxDeath : Sfx;
-	
-	/*	This set of variables describes player states.
-	 */
+	// These describe the state of the Player entity
 	public var isDestroyed : Bool;
 	public var isReady : Bool;
 	
-	/*	Constructor for the Entity class extended by the Player class
+	/**
+	 *	Constructor for the Entity class extended by the Player class
 	 *	@param	x		X position of Player on scene
 	 *	@param	y		Y position of Player on scene
-	 *
-	 *	Initializes player movement variables as well as
-	 *	sound effects variables.
-	 *
-	 *	The player's graphical representation is a circle with a 20 px
-	 *	radius. There's a -20, -20 offset to center the graphic to the
-	 *	center of the object's Entity.
-	 *	The player's hitbox is set to a 30 x 30 px square, with it's
-	 *	origin at 15, 15 (because of the -20, -20 offset). The hitbox
-	 *	type is set to "player".
-	 *	
-	 *	The input corresponding to "jump" is tied to certain keyboard
-	 *	keys.
-	 *
-	 *	The Player entity is set to be rendered on layer 1.
 	 */
-	public function new ( x : Float, y : Float ) : Void
-	{
+	public function new ( x : Float, y : Float ) : Void {
 		super( x, y );
-		
+		// Movement properties
 		acceleration = 0;
 		gravity = 12;
 		velocity = 0;
-		
-		sfxJump = new Sfx( "audio/jump.wav" );
-		sfxDeath = new Sfx( "audio/death.wav" );
-		
-		isDestroyed = false;
-		isReady = false;
-		
-		graphic = Image.createCircle( 20, 0xE0E0D0, 100 );
+		// Set up Player entity graphic, hitbox, collision type
+		graphic = Image.createCircle(20, 0xE0E0D0, 100);
 		graphic.x = -20;
 		graphic.y = -20;
-		setHitbox( 30, 30, 15, 15 );
+		setHitbox(30, 30, 15, 15);
 		type = "player";
-		
+		// Set up sound effects
+		sfxJump = new Sfx( "audio/jump.wav" );
+		//sfxDeath = new Sfx( "audio/death.wav" );
+		// Define input
 		Input.define( "jump", [Key.UP, Key.W, Key.SPACE] );
-		
+		// State of Player entity when created
+		isDestroyed = false;
+		isReady = false;
+		// Render Player entity on layer 1
 		layer = 1;
 	}
 	
-	/*	Handles user input
+	/**
+	 *	Handles user input and acts accordingly
 	 */
-	private function handleInput () : Void
-	{
-		if ( Input.pressed( "jump" ) || Input.mousePressed )
-		{
+	private function handleInput () : Void {
+		if ( Input.pressed( "jump" ) || Input.mousePressed ) {
 			acceleration = -8;
 			sfxJump.play( 0.8, 0, false );
 			isReady = true;
 		}
 	}
 	
-	/*	Moves the Player entity depending on movement variables/properties
+	/**
+	 *	Moves the Player entity depending on movement variables/properties
 	 */
-	private function move () : Void
-	{
-		if ( acceleration < gravity )
-		{
+	private function move () : Void {
+		if ( acceleration < gravity ) {
 			acceleration += 0.5;
-		}
-		else if ( acceleration >= gravity )
-		{
+		} else if ( acceleration >= gravity ) {
 			acceleration = gravity;
 		}
 		
 		velocity = acceleration;
 		
-		moveBy( 0, velocity );
+		moveBy(0, velocity);
 	}
 	
-	/*	Function defined in the Engine class, used to update the game
-	 *
-	 *	Calls handleInput() to decide what to do based on the player's
-	 *	input. Makes the necessary checks for the game to proceed
-	 *	as designed.
+	/**
+	 *	Function defined in the Engine class, used to update the game
 	 */
-	override public function update () : Void
-	{
+	override public function update () : Void {
 		handleInput();
 		
-		if ( isReady )
-		{
+		if (isReady) {
 			move();
 		}
 		
-		if ( !onCamera )
-		{
+		if ( !onCamera ) {
 			destroy();
 		}
 		
 		var e : Entity = collide( "obstacle", x, y );
-		if ( e != null )
-		{
+		if ( e != null ) {
 			var o : Obstacle = cast( e, Obstacle );
 			this.destroy();
 		}
@@ -129,12 +97,12 @@ class Player extends Entity
 		super.update();
 	}
 	
-	/*	Destroys the Player entity and updates its state variable
+	/**
+	 *	Destroys the Player entity and updates the state variable
 	 */
-	public function destroy () : Void
-	{
-		sfxDeath.play( 0.6, 0, false );
-		scene.remove( this );
+	public function destroy () : Void {
+		//sfxDeath.play( 0.8, 0, false );
+		scene.remove(this);
 		isDestroyed = true;
 	}
 }

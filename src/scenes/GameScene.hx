@@ -9,66 +9,54 @@ import com.haxepunk.Scene;
 import flash.net.SharedObject;
 
 import entities.*;
+import gui.*;
 
-class GameScene extends Scene
-{
-	/*	The following private variables relate to the game's GUI.
-	 *
-	 *	MousePointer class extends Entity and selected options
-	 *	are detected through collision with the Option class (also
-	 *	extending Entity). This	was done for easier implementation
-	 *	of the system on mobile targets.
-	 *
-	 *	TextField class is the same as the Option class with
-	 *	the difference being a lack of collision detection.
-	 *
-	 *	GameScore class is a modified TextField class which updates
-	 *	and displays the players current score. The score value is
-	 *	returned via a getter method and stored in the SharedObject.
-	 */
-	private var mousePointer : gui.MousePointer;
-	private var optionMenu : gui.Option;
-	private var optionRestart : gui.Option;
-	private var txtfieldInstructions : gui.TextField;
-	private var txtfieldGameOver : gui.TextField;
-	private var txtfieldScores : gui.TextField;
-	private var txtScore : gui.GameScore;
-	
-	/*	Player class extends Entity, represents the player.
-	 */
+class GameScene extends Scene {
+	//Entities:
 	private var player : Player;
-	
-	/*	spawnTimer is used to time the spawn times of obstacles.
-	 *	quitTimer is used to disable the Quit option for a while
-	 *	to prevent accidental quitting of the game.
-	 */
+	public var textScore : GameScore;
+	private var textInstructions : Instructions;
+	//Variables:
+	public var restart : Bool;
 	private var spawnTimer : Float;
 	private var quitTimer : Float;
 	
-	/*	SharedObject used for storing game progress.
-	 */
+	private var mousePointer : gui.MousePointer;
+	private var optionMenu : gui.Option;
+	private var optionRestart : gui.Option;
+	//private var txtfieldScore : gui.TextField;
+	private var txtfieldInstructions : gui.TextField;
+	private var txtfieldGameOver : gui.TextField;
+	private var txtfieldScores : gui.TextField;
+	
 	private var so : SharedObject;
 	
-	/*	Constructor for the GameScene class extending Scene.
-	 *
-	 *	Creates player object and initializes spawnTimer and
-	 *	quitTimer variables.
-	 *
-	 *	Creates objects of GUI classes with specific parameters
-	 *	depending on whether the target is mobile or not. The
-	 *	difference is in the instruction text ("Touch" instead
-	 *	of "CLICK") and the on-screen position of the options.
-	 */
-	public function new () : Void
-	{
+	public function new () {
 		super ();
 			
+		//Declaring the entities
 		player = new Player ( 100, HXP.halfHeight );
+		textScore = new GameScore ( HXP.width/2, 24, false );/*
+#if mobile
+		textInstructions = new Instructions ( 10, 10, "DODGE OBSTACLES." +
+											 "\nSTAY INSIDE THE SCREEN." +
+											 "\nTOUCH TO JUMP." +
+											 "\nTOUCH TO CONTINUE.", true );
+#else
+		textInstructions = new Instructions ( 10, 10, "DODGE OBSTACLES." +
+											 "\nSTAY INSIDE THE SCREEN." +
+											 "\nJUMP: LCLICK, SPACE, W, UP." +
+											 "\nJUMP TO CONTINUE.", true );
+#end*/
+		//Declaring the variables
+		restart = false;
 		spawnTimer = 0;
 		quitTimer = 0;
 		
 		mousePointer = new gui.MousePointer(0, 0);
-		txtScore = new gui.GameScore ( HXP.width/2, 24, false );
+
+		//txtfieldScore = new gui.TextField(HXP.width/2, 24, "SCORE: ", 24, "top", false);
+		
 #if mobile
 		txtfieldInstructions = new gui.TextField(HXP.width/2, HXP.height/2, 
 												 "AVOID COLLISION" +
@@ -90,20 +78,14 @@ class GameScene extends Scene
 		txtfieldScores = new gui.TextField(HXP.width/2, HXP.height/2-24, "SCORE: ", 16, "center", "bottom", false);	
 		optionRestart = new gui.Option(HXP.width/2, HXP.height/2+24, "RESTART", 32, "top", false);	
 		optionMenu = new gui.Option(HXP.width/2, HXP.height/2+88, "MENU", 32, "top", false);
+#end	
+		
 		Input.define( "jump", [Key.UP, Key.W, Key.SPACE, Key.ENTER] );
 		Input.define( "exit", [Key.ESCAPE, Key.BACKSPACE] );
-#end
 	}
 	
-	/*	Called when Scene is switched to and set to the currently
-	 *	active Scene.
-	 *
-	 *	Sets background colour of Scene.
-	 *
-	 *	Places player object and GUI elements on the Scene.
-	 */
-	override public function begin () : Void
-	{
+	override public function begin () {
+		//Setting up the background colour
 #if flash
         HXP.screen.color = 0x222222;
 #else
@@ -112,26 +94,23 @@ class GameScene extends Scene
         base.scrollX = base.scrollY = 0;
         addGraphic(base).layer = 100;
 #end
+		//Adding the entities to the scene
 		add ( mousePointer );
 		add ( optionMenu );
 		add ( optionRestart );
 		add ( txtfieldInstructions );
 		add ( txtfieldGameOver );
-		add ( txtfieldScores );	
-		add ( txtScore );
+		//add ( txtfieldScore );
+		add ( txtfieldScores );
+		
+		add ( textScore );
+		//add ( textInstructions );
 		add ( player );
 		
 		super.begin();
 	}
 	
-	/*	Updates the game, updating the Scene and its Entities.
-	 *
-	 *	Calls setup() to set the game up, player and obstacles.
-	 *	Calls showScoreboard() to check for the event that the
-	 *	scoreboard needs to be displayed.
-	 */
-	override public function update () : Void
-	{
+	override public function update () {
 		setup();
 		
 		showScoreboard();
@@ -139,22 +118,12 @@ class GameScene extends Scene
 		super.update();
 	}
 	
-	/*	Called when Scene is switched from and is no longer the
-	 *	currently active Scene.
-	 *
-	 *	Removes all entities and assets on Scene switch and sets
-	 *	the high score of the current session to 0.
-	 */
-	override public function end () : Void
-	{
+	override public function end () {
 		removeAll();
 		
-		try
-		{
+		try {
 			so = SharedObject.getLocal( "highscore" );
-		}
-		catch ( error : Dynamic )
-		{
+		} catch ( error : Dynamic ) {
 			trace("SharedObject error: " + error);
 		}
 		
@@ -163,96 +132,77 @@ class GameScene extends Scene
 		super.end();
 	}
 	
-	/*	Sets up the game by checking whether player is ready
-	 *	to play. If he is, displays the necessary GUI elements
-	 *	and calls spawn() to create obstacles. Increments current
-	 *	score while player is still alive.
-	 */
 	private function setup () : Void {
-		if (player.isReady)
-		{
-			txtScore.visible = true;
-						
+		if (player.isReady) {
+			textScore.visible = true;
+			//textInstructions.visible = false;
+			
 			txtfieldInstructions.visible = false;
-						
+			//txtfieldScore.visible = true;
+			
 			spawn();
 			
-			if ( !player.isDestroyed )
-			{
-				txtScore.addScore();
+			if ( !player.isDestroyed ) {
+				textScore.addScore();
 			}
 		}
 	}
 	
-	/*	Creates the obstacles by counting the time elapsed since
-	 *	the last frame. Obstacles are created at max game width,
-	 *	but random game height position.
-	 */
 	private function spawn () : Void {
 		spawnTimer += HXP.elapsed;
-		if (spawnTimer >= 0.3)
-		{
+		if (spawnTimer >= 0.3) {
 			add ( new Obstacle ( HXP.width, (HXP.height-40) * HXP.random, HXP.random ) );
 			spawnTimer=0;
 		}
 	}
 	
-	/*	Records session best and overall highscore with the use
-	 *	of SharedObject.
-	 */
-	private function recordScore () : Void
-	{
-		try
-		{
+	private function recordScore () : Void {
+		try {
 			so = SharedObject.getLocal( "highscore" );
-		}
-		catch ( error : Dynamic )
-		{
+		} catch ( error : Dynamic ) {
 			trace("SharedObject error: " + error);
 		}
 			
-		if ( txtScore.getScore() > Std.int(so.data.sessionbest) )
-		{
-			so.data.sessionbest = txtScore.getScore();
+		if ( textScore.getScore() > Std.int(so.data.sessionbest) ) {
+			so.data.sessionbest = textScore.getScore();
 			so.flush();
 		}
 			
-		if ( txtScore.getScore() > Std.int(so.data.score) )
-		{
-			so.data.score = txtScore.getScore();
+		if ( textScore.getScore() > Std.int(so.data.score) ) {
+			so.data.score = textScore.getScore();
 			so.flush();
 		}
 	}
 	
-	/*	Displays the scoreboard after the player dies. Offers
-	 *	options to retry the game or exit to the TitleScene.
-	 */
-	private function showScoreboard () : Void
-	{
-		if (player.isDestroyed)
-		{
+	private function showScoreboard () : Void {
+		if (player.isDestroyed){
 			quitTimer += HXP.elapsed;
 			
 			recordScore();
 			
-			txtScore.visible = false;
+			textScore.visible = false;
 			
 			optionMenu.visible = true;
 			optionRestart.visible = true;
 			txtfieldGameOver.visible = true;
 					
-			txtfieldScores.setText("SCORE: " + txtScore.getScore() +
+			txtfieldScores.setText("SCORE: " + textScore.getScore() +
 								   " (BEST: " + so.data.sessionbest +
 								   " / ALL-TIME: " + so.data.score + ") ");
 			txtfieldScores.visible = true;
-
-			if (mousePointer.handle(optionMenu) || Input.pressed("exit"))
-			{
+#if mobile
+			if (mousePointer.handle(optionMenu)) {
 				HXP.scene = new scenes.TitleScene();
-			} else if ((mousePointer.handle(optionRestart) || Input.pressed("jump")) && quitTimer >= 0.5)
-			{
+			} else if (mousePointer.handle(optionRestart) && quitTimer >= 0.5) {
 				HXP.scene = new scenes.GameScene();
 			}
+#else
+			if (mousePointer.handle(optionMenu) || Input.pressed("exit")) {
+				HXP.scene = new scenes.TitleScene();
+			} else if ((mousePointer.handle(optionRestart) || Input.pressed("jump")) && quitTimer >= 0.5) {
+				HXP.scene = new scenes.GameScene();
+			}
+#end
 		}
 	}
 }
