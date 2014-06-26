@@ -1,0 +1,218 @@
+Could not find primitive lime_bitmap_data_set_flags__1.
+Keyboard layout unknown, please send the following to the SDL mailing list (sdl@libsdl.org):
+code = 1, sym = 0xFF1B (Escape) scancode = 41 (Escape)
+code = 2, sym = 0x31 (1) scancode = 40 (Return)
+code = 3, sym = 0x32 (2) scancode = 41 (Escape)
+code = 4, sym = 0x33 (3) scancode = 42 (Backspace)
+code = 5, sym = 0x34 (4) scancode = 43 (Tab)
+code = 6, sym = 0x35 (5) scancode = 44 (Space)
+code = 7, sym = 0x36 (6) scancode = 45 (-)
+code = 8, sym = 0x37 (7) scancode = 46 (=)
+code = 9, sym = 0x38 (8) scancode = 47 ([)
+code = 10, sym = 0x39 (9) scancode = 48 (])
+code = 11, sym = 0x30 (0) scancode = 39 (0)
+code = 12, sym = 0x27 (apostrophe) scancode not found
+code = 13, sym = 0x2B (plus) scancode not found
+code = 14, sym = 0xFF08 (BackSpace) scancode = 42 (Backspace)
+code = 15, sym = 0xFF09 (Tab) scancode = 43 (Tab)
+code = 16, sym = 0x71 (q) scancode not found
+code = 17, sym = 0x77 (w) scancode not found
+code = 18, sym = 0x65 (e) scancode not found
+code = 19, sym = 0x72 (r) scancode not found
+code = 20, sym = 0x74 (t) scancode not found
+code = 21, sym = 0x7A (z) scancode not found
+code = 22, sym = 0x75 (u) scancode not found
+code = 23, sym = 0x69 (i) scancode not found
+code = 24, sym = 0x6F (o) scancode not found
+code = 25, sym = 0x70 (p) scancode not found
+code = 26, sym = 0x1B9 (scaron) scancode not found
+code = 27, sym = 0x1F0 (dstroke) scancode not found
+code = 28, sym = 0xFF0D (Return) scancode = 40 (Return)
+code = 29, sym = 0xFFE3 (Control_L) scancode = 224 (Left Ctrl)
+code = 30, sym = 0x61 (a) scancode not found
+code = 31, sym = 0x73 (s) scancode not found
+code = 32, sym = 0x64 (d) scancode not found
+code = 33, sym = 0x66 (f) scancode not found
+code = 34, sym = 0x67 (g) scancode not found
+code = 35, sym = 0x68 (h) scancode not found
+code = 36, sym = 0x6A (j) scancode not found
+code = 37, sym = 0x6B (k) scancode not found
+code = 38, sym = 0x6C (l) scancode not found
+code = 39, sym = 0x1E8 (ccaron) scancode not found
+code = 40, sym = 0x1E6 (cacute) scancode not found
+code = 41, sym = 0x60 (grave) scancode not found
+code = 42, sym = 0xFFE1 (Shift_L) scancode = 225 (Left Shift)
+code = 43, sym = 0x1BE (zcaron) scancode not found
+code = 44, sym = 0x79 (y) scancode not found
+code = 45, sym = 0x78 (x) scancode not found
+code = 46, sym = 0x63 (c) scancode not found
+code = 47, sym = 0x76 (v) scancode not found
+code = 48, sym = 0x62 (b) scancode not found
+code = 49, sym = 0x6E (n) scancode not found
+code = 50, sym = 0x6D (m) scancode not found
+code = 51, sym = 0x2C (comma) scancode not found
+code = 52, sym = 0x2E (period) scancode not found
+code = 53, sym = 0x2D (minus) scancode not found
+code = 54, sym = 0xFFE2 (Shift_R) scancode = 229 (Right Shift)
+code = 55, sym = 0xFFAA (KP_Multiply) scancode = 85 (Keypad *)
+code = 56, sym = 0xFFE9 (Alt_L) scancode = 226 (Left Alt)
+code = 57, sym = 0x20 (space) scancode not found
+code = 58, sym = 0xFFE5 (Caps_Lock) scancode = 57 (CapsLock)
+code = 59, sym = 0xFFBE (F1) scancode = 58 (F1)
+code = 60, sym = 0xFFBF (F2) scancode = 59 (F2)
+code = 61, sym = 0xFFC0 (F3) scancode = 60 (F3)
+code = 62, sym = 0xFFC1 (F4) scancode = 61 (F4)
+code = 63, sym = 0xFFC2 (F5) scancode = 62 (F5)
+code = 64, sym = 0xFFC3 (F6) scancode = 63 (F6)
+code = 65, sym = 0xFFC4 (F7) scancode = 64 (F7)
+code = 66, sym = 0xFFC5 (F8) scancode = 65 (F8)
+code = 67, sym = 0xFFC6 (F9) scancode = 66 (F9)
+code = 68, sym = 0xFFC7 (F10) scancode = 67 (F10)
+code = 69, sym = 0xFF7F (Num_Lock) scancode = 83 (Numlock)
+code = 70, sym = 0xFF14 (Scroll_Lock) scancode = 71 (ScrollLock)
+code = 71, sym = 0xFF95 (KP_Home) scancode = 95 (Keypad 7)
+code = 72, sym = 0xFF97 (KP_Up) scancode = 96 (Keypad 8)
+code = 73, sym = 0xFF9A (KP_Prior) scancode = 97 (Keypad 9)
+code = 74, sym = 0xFFAD (KP_Subtract) scancode = 86 (Keypad -)
+code = 75, sym = 0xFF96 (KP_Left) scancode = 92 (Keypad 4)
+code = 76, sym = 0xFF9D (KP_Begin) scancode = 93 (Keypad 5)
+code = 77, sym = 0xFF98 (KP_Right) scancode = 94 (Keypad 6)
+code = 78, sym = 0xFFAB (KP_Add) scancode = 87 (Keypad +)
+code = 79, sym = 0xFF9C (KP_End) scancode = 89 (Keypad 1)
+code = 80, sym = 0xFF99 (KP_Down) scancode = 90 (Keypad 2)
+code = 81, sym = 0xFF9B (KP_Next) scancode = 91 (Keypad 3)
+code = 82, sym = 0xFF9E (KP_Insert) scancode = 98 (Keypad 0)
+code = 83, sym = 0xFF9F (KP_Delete) scancode = 99 (Keypad .)
+code = 84, sym = 0xFE03 (ISO_Level3_Shift) scancode not found
+code = 86, sym = 0x3C (less) scancode not found
+code = 87, sym = 0xFFC8 (F11) scancode = 68 (F11)
+code = 88, sym = 0xFFC9 (F12) scancode = 69 (F12)
+code = 90, sym = 0xFF26 (Katakana) scancode not found
+code = 91, sym = 0xFF25 (Hiragana) scancode not found
+code = 92, sym = 0xFF23 (Henkan_Mode) scancode not found
+code = 93, sym = 0xFF27 (Hiragana_Katakana) scancode not found
+code = 94, sym = 0xFF22 (Muhenkan) scancode not found
+code = 96, sym = 0xFF8D (KP_Enter) scancode = 88 (Keypad Enter)
+code = 97, sym = 0xFFE4 (Control_R) scancode = 228 (Right Ctrl)
+code = 98, sym = 0xFFAF (KP_Divide) scancode = 84 (Keypad /)
+code = 99, sym = 0xFF61 (Print) scancode = 70 (PrintScreen)
+code = 100, sym = 0xFE03 (ISO_Level3_Shift) scancode not found
+code = 101, sym = 0xFF0A (Linefeed) scancode not found
+code = 102, sym = 0xFF50 (Home) scancode = 74 (Home)
+code = 103, sym = 0xFF52 (Up) scancode = 82 (Up)
+code = 104, sym = 0xFFFF (Delete) scancode = 76 (Delete)
+code = 105, sym = 0xFF51 (Left) scancode = 80 (Left)
+code = 106, sym = 0xFF53 (Right) scancode = 79 (Right)
+code = 107, sym = 0xFF57 (End) scancode = 77 (End)
+code = 108, sym = 0xFF54 (Down) scancode = 81 (Down)
+code = 109, sym = 0xFF56 (Next) scancode = 78 (PageDown)
+code = 110, sym = 0xFF1B (Escape) scancode = 41 (Escape)
+code = 111, sym = 0xFFFF (Delete) scancode = 76 (Delete)
+code = 113, sym = 0x1008FF12 (XF86AudioMute) scancode not found
+code = 114, sym = 0x1008FF11 (XF86AudioLowerVolume) scancode not found
+code = 115, sym = 0x1008FF13 (XF86AudioRaiseVolume) scancode not found
+code = 116, sym = 0x1008FF2A (XF86PowerOff) scancode not found
+code = 117, sym = 0xFFBD (KP_Equal) scancode = 103 (Keypad =)
+code = 118, sym = 0xB1 (plusminus) scancode not found
+code = 119, sym = 0xFF13 (Pause) scancode = 72 (Pause)
+code = 120, sym = 0x1008FF4A (XF86LaunchA) scancode not found
+code = 121, sym = 0xFFAE (KP_Decimal) scancode = 99 (Keypad .)
+code = 122, sym = 0xFF31 (Hangul) scancode not found
+code = 123, sym = 0xFF34 (Hangul_Hanja) scancode not found
+code = 125, sym = 0xFFEB (Super_L) scancode = 227 (Left GUI)
+code = 126, sym = 0xFFEC (Super_R) scancode = 231 (Right GUI)
+code = 127, sym = 0xFF67 (Menu) scancode = 118 (Menu)
+code = 128, sym = 0xFF69 (Cancel) scancode = 120 (Stop)
+code = 129, sym = 0xFF66 (Redo) scancode = 121 (Again)
+code = 130, sym = 0x1005FF70 (SunProps) scancode not found
+code = 131, sym = 0xFF65 (Undo) scancode = 122 (Undo)
+code = 132, sym = 0x1005FF71 (SunFront) scancode not found
+code = 133, sym = 0x1008FF57 (XF86Copy) scancode not found
+code = 134, sym = 0x1005FF73 (SunOpen) scancode not found
+code = 135, sym = 0x1008FF6D (XF86Paste) scancode not found
+code = 136, sym = 0xFF68 (Find) scancode = 126 (Find)
+code = 137, sym = 0x1008FF58 (XF86Cut) scancode not found
+code = 138, sym = 0xFF6A (Help) scancode = 117 (Help)
+code = 139, sym = 0x1008FF65 (XF86MenuKB) scancode not found
+code = 140, sym = 0x1008FF1D (XF86Calculator) scancode not found
+code = 142, sym = 0x1008FF2F (XF86Sleep) scancode not found
+code = 143, sym = 0x1008FF2B (XF86WakeUp) scancode not found
+code = 144, sym = 0x1008FF5D (XF86Explorer) scancode not found
+code = 145, sym = 0x1008FF7B (XF86Send) scancode not found
+code = 147, sym = 0x1008FF8A (XF86Xfer) scancode not found
+code = 148, sym = 0x1008FF41 (XF86Launch1) scancode not found
+code = 149, sym = 0x1008FF42 (XF86Launch2) scancode not found
+code = 150, sym = 0x1008FF2E (XF86WWW) scancode not found
+code = 151, sym = 0x1008FF5A (XF86DOS) scancode not found
+code = 152, sym = 0x1008FF2D (XF86ScreenSaver) scancode not found
+code = 154, sym = 0x1008FF74 (XF86RotateWindows) scancode not found
+code = 155, sym = 0x1008FF19 (XF86Mail) scancode not found
+code = 156, sym = 0x1008FF30 (XF86Favorites) scancode not found
+code = 157, sym = 0x1008FF33 (XF86MyComputer) scancode not found
+code = 158, sym = 0x1008FF26 (XF86Back) scancode not found
+code = 159, sym = 0x1008FF27 (XF86Forward) scancode not found
+code = 161, sym = 0x1008FF2C (XF86Eject) scancode not found
+code = 162, sym = 0x1008FF2C (XF86Eject) scancode not found
+code = 163, sym = 0x1008FF17 (XF86AudioNext) scancode not found
+code = 164, sym = 0x1008FF14 (XF86AudioPlay) scancode not found
+code = 165, sym = 0x1008FF16 (XF86AudioPrev) scancode not found
+code = 166, sym = 0x1008FF15 (XF86AudioStop) scancode not found
+code = 167, sym = 0x1008FF1C (XF86AudioRecord) scancode not found
+code = 168, sym = 0x1008FF3E (XF86AudioRewind) scancode not found
+code = 169, sym = 0x1008FF6E (XF86Phone) scancode not found
+code = 171, sym = 0x1008FF81 (XF86Tools) scancode not found
+code = 172, sym = 0x1008FF18 (XF86HomePage) scancode not found
+code = 173, sym = 0x1008FF73 (XF86Reload) scancode not found
+code = 174, sym = 0x1008FF56 (XF86Close) scancode not found
+code = 177, sym = 0x1008FF78 (XF86ScrollUp) scancode not found
+code = 178, sym = 0x1008FF79 (XF86ScrollDown) scancode not found
+code = 179, sym = 0x28 (parenleft) scancode not found
+code = 180, sym = 0x29 (parenright) scancode not found
+code = 181, sym = 0x1008FF68 (XF86New) scancode not found
+code = 182, sym = 0xFF66 (Redo) scancode = 121 (Again)
+code = 183, sym = 0x1008FF81 (XF86Tools) scancode not found
+code = 184, sym = 0x1008FF45 (XF86Launch5) scancode not found
+code = 185, sym = 0x1008FF46 (XF86Launch6) scancode not found
+code = 186, sym = 0x1008FF47 (XF86Launch7) scancode not found
+code = 187, sym = 0x1008FF48 (XF86Launch8) scancode not found
+code = 188, sym = 0x1008FF49 (XF86Launch9) scancode not found
+code = 190, sym = 0x1008FFB2 (XF86AudioMicMute) scancode not found
+code = 191, sym = 0x1008FFA9 (XF86TouchpadToggle) scancode not found
+code = 192, sym = 0x1008FFB0 (XF86TouchpadOn) scancode not found
+code = 193, sym = 0x1008FFB1 (XF86TouchpadOff) scancode not found
+code = 195, sym = 0xFF7E (Mode_switch) scancode = 257 (ModeSwitch)
+code = 200, sym = 0x1008FF14 (XF86AudioPlay) scancode not found
+code = 201, sym = 0x1008FF31 (XF86AudioPause) scancode not found
+code = 202, sym = 0x1008FF43 (XF86Launch3) scancode not found
+code = 203, sym = 0x1008FF44 (XF86Launch4) scancode not found
+code = 204, sym = 0x1008FF4B (XF86LaunchB) scancode not found
+code = 205, sym = 0x1008FFA7 (XF86Suspend) scancode not found
+code = 206, sym = 0x1008FF56 (XF86Close) scancode not found
+code = 207, sym = 0x1008FF14 (XF86AudioPlay) scancode not found
+code = 208, sym = 0x1008FF97 (XF86AudioForward) scancode not found
+code = 210, sym = 0xFF61 (Print) scancode = 70 (PrintScreen)
+code = 212, sym = 0x1008FF8F (XF86WebCam) scancode not found
+code = 215, sym = 0x1008FF19 (XF86Mail) scancode not found
+code = 216, sym = 0x1008FF8E (XF86Messenger) scancode not found
+code = 217, sym = 0x1008FF1B (XF86Search) scancode not found
+code = 218, sym = 0x1008FF5F (XF86Go) scancode not found
+code = 219, sym = 0x1008FF3C (XF86Finance) scancode not found
+code = 220, sym = 0x1008FF5E (XF86Game) scancode not found
+code = 221, sym = 0x1008FF36 (XF86Shop) scancode not found
+code = 223, sym = 0xFF69 (Cancel) scancode = 120 (Stop)
+code = 224, sym = 0x1008FF03 (XF86MonBrightnessDown) scancode not found
+code = 225, sym = 0x1008FF02 (XF86MonBrightnessUp) scancode not found
+code = 226, sym = 0x1008FF32 (XF86AudioMedia) scancode not found
+code = 227, sym = 0x1008FF59 (XF86Display) scancode not found
+code = 228, sym = 0x1008FF04 (XF86KbdLightOnOff) scancode not found
+code = 229, sym = 0x1008FF06 (XF86KbdBrightnessDown) scancode not found
+code = 230, sym = 0x1008FF05 (XF86KbdBrightnessUp) scancode not found
+code = 231, sym = 0x1008FF7B (XF86Send) scancode not found
+code = 232, sym = 0x1008FF72 (XF86Reply) scancode not found
+code = 233, sym = 0x1008FF90 (XF86MailForward) scancode not found
+code = 234, sym = 0x1008FF77 (XF86Save) scancode not found
+code = 235, sym = 0x1008FF5B (XF86Documents) scancode not found
+code = 236, sym = 0x1008FF93 (XF86Battery) scancode not found
+code = 237, sym = 0x1008FF94 (XF86Bluetooth) scancode not found
+code = 238, sym = 0x1008FF95 (XF86WLAN) scancode not found
+Could find function free_abstract 
