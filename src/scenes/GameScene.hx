@@ -86,7 +86,7 @@ class GameScene extends Scene
 												 "\nTO JUMP",
 												 24, "center", "center", true
 												);
-		txtfieldGameOver = new gui.TextField(HXP.width/2, HXP.height/2-32, "YOU DIED", 64, "center", "bottom", false);
+		txtfieldGameOver = new gui.TextField(HXP.width/2, HXP.height/2-32, "GAME OVER", 64, "center", "bottom", false);
 		txtfieldScores = new gui.TextField(HXP.width/2, HXP.height/2-24, "SCORE: ", 16, "center", "bottom", false);	
 		optionRestart = new gui.Option(HXP.width/2, HXP.height/2+24, "RESTART", 32, "top", false);	
 		optionMenu = new gui.Option(HXP.width/2, HXP.height/2+88, "MENU", 32, "top", false);
