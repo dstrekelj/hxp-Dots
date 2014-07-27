@@ -1,6 +1,7 @@
 package entities;
 
 import com.haxepunk.Entity;
+import com.haxepunk.Graphic;
 import com.haxepunk.graphics.Image;
 
 class Obstacle extends Entity
@@ -11,6 +12,8 @@ class Obstacle extends Entity
 	 */
 	private var velocity : Float;
 	private var velocityFactor : Float;
+	
+	private var gfxCircle : Graphic = Image.createCircle(20, 0x44BBFF, 100);
 	
 	/*	The constructor for the Obstacle class, extending Entity.
 	 *	@param	x				Horizontal position of obstacle on screen
@@ -26,7 +29,7 @@ class Obstacle extends Entity
 	{
 		super( x, y );
 		
-		graphic = Image.createCircle( 20, 0x44BBFF, 100 );
+		graphic = gfxCircle;	//Image.createCircle( 20, 0x44BBFF, 100 );
 		setHitbox( 30, 30, -5, -5 );
 		type = "obstacle";
 		
@@ -34,28 +37,26 @@ class Obstacle extends Entity
 		velocity = 7;
 		layer = 1;
 	}
-	
-	/*	This function moves the obstacle according to the velocity
-	 *	and velocityFactor variables.
-	 */
-	private function move () : Void
-	{
-		var speed : Float = 0;
-		speed = -1 * ( velocity + ( velocity * velocityFactor ) );
-		moveBy( speed, 0 );
-	}
-	
+		
 	/*	Updates the obstacle when on Scene. Makes sure to destroy
 	 *	instances of the Obstacle class when they move off screen
 	 *	to free used up memory space by calling destroy().
 	 */
 	override public function update () : Void
 	{
-		move();
+		super.update();
+		
+		moveBy(-(velocity + (velocity * velocityFactor)), 0);
+		
 		if ( !onCamera ) {
 			destroy();
-		}
-		super.update();
+		}		
+	}
+	
+	override public function removed () : Void
+	{
+		super.removed();
+		destroy();
 	}
 	
 	/*	Destroys the object of the Obstacle class, including its graphic
@@ -64,6 +65,7 @@ class Obstacle extends Entity
 	public function destroy () : Void
 	{
 		graphic.destroy();
+		com.haxepunk.HXP.removeBitmap(graphic);
 		scene.remove( this );
 	}
 }

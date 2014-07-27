@@ -1,15 +1,19 @@
 import com.haxepunk.Engine;
 import com.haxepunk.HXP;
+import com.haxepunk.Scene;
 
 import flash.net.SharedObject;
 
 class Main extends Engine
 {
+	public static var sceneGame : Scene;
+	public static var sceneTitle : Scene;	
+	
 	/*	Necessary for the creation of the SharedObject object used to save
 	 *	high scores and other progress. Used in setupSharedObject() function.
 	 */
 	private var so : SharedObject;
-	
+
 	/*	Constructor for the Main class extending the Engine class.
 	 *	@param	width		The width of the game
 	 *	@param	height		The height of the game
@@ -24,7 +28,7 @@ class Main extends Engine
 	{
 		super( 640, 480, frameRate, fixed );
 	}
-	
+
 	/*	Main game class, manages the game loop.
 	 */
 	public static function main () : Void
@@ -43,8 +47,12 @@ class Main extends Engine
 #if debug
 		HXP.console.enable();
 #end
-		setupSharedObject();
-		HXP.scene = new scenes.TitleScene();
+		setupSharedObject();		
+				
+		sceneGame = new scenes.GameScene();
+		sceneTitle = new scenes.TitleScene();
+		
+		HXP.scene = sceneTitle;
 	}
 	
 	/*	Sets up a Flash SharedObject for storing game progress

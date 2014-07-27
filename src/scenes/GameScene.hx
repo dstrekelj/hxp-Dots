@@ -6,36 +6,25 @@ import com.haxepunk.utils.Input;
 import com.haxepunk.utils.Key;
 import com.haxepunk.Scene;
 
+import gui.Button;
+import gui.CEvent;
+import gui.Control;
+import gui.Label;
+
 import flash.net.SharedObject;
 
 import entities.*;
 
 class GameScene extends Scene
 {
-	/*	The following private variables relate to the game's GUI.
-	 *
-	 *	MousePointer class extends Entity and selected options
-	 *	are detected through collision with the Option class (also
-	 *	extending Entity). This	was done for easier implementation
-	 *	of the system on mobile targets.
-	 *
-	 *	TextField class is the same as the Option class with
-	 *	the difference being a lack of collision detection.
-	 *
-	 *	GameScore class is a modified TextField class which updates
-	 *	and displays the players current score. The score value is
-	 *	returned via a getter method and stored in the SharedObject.
-	 */
-	private var mousePointer : gui.MousePointer;
-	private var optionMenu : gui.Option;
-	private var optionRestart : gui.Option;
-	private var txtfieldInstructions : gui.TextField;
-	private var txtfieldGameOver : gui.TextField;
-	private var txtfieldScores : gui.TextField;
-	private var txtScore : gui.GameScore;
+	private var bMenu : Button;
+	private var bRestart : Button;
+	private var lInstructions : Label;
+	private var lGameOver : Label;
+	private var lHighScores : Label;
+	private var lScore : Label;
 	
-	/*	Player class extends Entity, represents the player.
-	 */
+	/**	Player class extends Entity, represents the player. */
 	private var player : Player;
 	
 	/*	spawnTimer is used to time the spawn times of obstacles.
@@ -45,9 +34,10 @@ class GameScene extends Scene
 	private var spawnTimer : Float;
 	private var quitTimer : Float;
 	
-	/*	SharedObject used for storing game progress.
-	 */
+	/**	SharedObject used for storing game progress. */
 	private var so : SharedObject;
+	
+	private var score : Float;
 	
 	/*	Constructor for the GameScene class extending Scene.
 	 *
@@ -62,11 +52,11 @@ class GameScene extends Scene
 	public function new () : Void
 	{
 		super ();
-			
+		score = 0;
 		player = new Player ( 100, HXP.halfHeight );
 		spawnTimer = 0;
 		quitTimer = 0;
-		
+		/*
 		mousePointer = new gui.MousePointer(0, 0);
 		txtScore = new gui.GameScore ( HXP.width/2, 24, false );
 #if mobile
@@ -92,7 +82,27 @@ class GameScene extends Scene
 		optionMenu = new gui.Option(HXP.width/2, HXP.height/2+88, "MENU", 32, "top", false);
 		Input.define( "jump", [Key.UP, Key.W, Key.SPACE, Key.ENTER] );
 		Input.define( "exit", [Key.ESCAPE, Key.BACKSPACE] );
+#end*/
+		lScore = new Label("", HXP.width / 2, 24, CENTER);
+		lScore.visible = false;
+#if mobile
+		lInstructions = new Label("AVOID COLLISION\nTOUCH SCREEN TO JUMP", HXP.width / 2, HXP.height / 2, CENTER, 24);
+		lGameOver = new Label("GAME OVER", HXP.width / 2, HXP.height / 2, TOP, 64);	
+		lHighScores = new Label("SCORE: ", HXP.width / 2, (HXP.height / 2) + 16, TOP);
+		bMenu = new Button("MENU", HXP.width - 12, 12, TOP_RIGHT, 48);
+		bRestart = new Button("RESTART", HXP.width - 12, HXP.height - 12, BOTTOM_RIGHT, 48);
+#else
+		lInstructions = new Label("AVOID COLLISION\nLEFT CLICK / SPACE / W / UP\nTO JUMP", HXP.width / 2, HXP.height / 2, CENTER, 24);
+		lGameOver = new Label("GAME OVER", HXP.width / 2, (HXP.height / 2) - 32, BOTTOM, 64);
+		lHighScores = new Label("SCORE: ", HXP.width / 2, (HXP.height / 2) - 24, BOTTOM, 16);
+		bMenu = new Button("MENU", HXP.width / 2, (HXP.height / 2) + 88, TOP, 32);
+		bRestart = new Button("RESTART", HXP.width / 2, (HXP.height / 2) + 24, TOP, 32);
 #end
+		lGameOver.visible = false;
+		lHighScores.visible = false;
+		bMenu.addEventListener(Control.MOUSE_DOWN, sceneHandler);
+		bRestart.addEventListener(Control.MOUSE_DOWN, sceneHandler);
+		
 	}
 	
 	/*	Called when Scene is switched to and set to the currently
@@ -111,14 +121,12 @@ class GameScene extends Scene
         base.color = 0x222222;
         base.scrollX = base.scrollY = 0;
         addGraphic(base).layer = 100;
-#end
-		add ( mousePointer );
-		add ( optionMenu );
-		add ( optionRestart );
-		add ( txtfieldInstructions );
-		add ( txtfieldGameOver );
-		add ( txtfieldScores );	
-		add ( txtScore );
+#end	
+		add(lScore);
+		add(lInstructions);
+		add(lGameOver);
+		add(lHighScores);
+		
 		add ( player );
 		
 		super.begin();
@@ -171,15 +179,15 @@ class GameScene extends Scene
 	private function setup () : Void {
 		if (player.isReady)
 		{
-			txtScore.visible = true;
-						
-			txtfieldInstructions.visible = false;
+			lScore.visible = true;
+			lInstructions.visible = false;
 						
 			spawn();
 			
 			if ( !player.isDestroyed )
 			{
-				txtScore.addScore();
+				score += HXP.elapsed;
+				lScore.text = "SCORE: " + Std.int(score);
 			}
 		}
 	}
@@ -211,15 +219,15 @@ class GameScene extends Scene
 			trace("SharedObject error: " + error);
 		}
 			
-		if ( txtScore.getScore() > Std.int(so.data.sessionbest) )
+		if ( Std.int(score) > Std.int(so.data.sessionbest) )
 		{
-			so.data.sessionbest = txtScore.getScore();
+			so.data.sessionbest = Std.int(score);
 			so.flush();
 		}
 			
-		if ( txtScore.getScore() > Std.int(so.data.score) )
+		if ( Std.int(score) > Std.int(so.data.score) )
 		{
-			so.data.score = txtScore.getScore();
+			so.data.score = Std.int(score);
 			so.flush();
 		}
 	}
@@ -235,17 +243,16 @@ class GameScene extends Scene
 			
 			recordScore();
 			
-			txtScore.visible = false;
+			lScore.visible = false;
 			
-			optionMenu.visible = true;
-			optionRestart.visible = true;
-			txtfieldGameOver.visible = true;
+			add(bMenu);
+			add(bRestart);
+			
+			lGameOver.visible = true;
 					
-			txtfieldScores.setText("SCORE: " + txtScore.getScore() +
-								   " (BEST: " + so.data.sessionbest +
-								   " / ALL-TIME: " + so.data.score + ") ");
-			txtfieldScores.visible = true;
-
+			lHighScores.text = "SCORE: " + Std.int(score) + " (BEST: " + so.data.sessionbest + " / ALL-TIME: " + so.data.score + ") ";
+			lHighScores.visible = true;
+			/*
 			if (mousePointer.handle(optionMenu) || Input.pressed("exit"))
 			{
 				HXP.scene = new scenes.TitleScene();
@@ -253,6 +260,18 @@ class GameScene extends Scene
 			{
 				HXP.scene = new scenes.GameScene();
 			}
+			*/
+		}
+	}
+	
+	private function sceneHandler (e : CEvent)
+	{
+		switch(e.senderID)
+		{
+			case id if (id == bMenu.ID):
+				HXP.scene = Main.sceneTitle;
+			case id if (id == bRestart.ID):
+				HXP.scene = new scenes.GameScene();
 		}
 	}
 }

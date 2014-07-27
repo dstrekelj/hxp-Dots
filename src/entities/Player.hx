@@ -3,6 +3,7 @@ package entities;
 import com.haxepunk.Entity;
 import com.haxepunk.HXP;
 import com.haxepunk.Sfx;
+import com.haxepunk.Graphic;
 import com.haxepunk.graphics.Image;
 import com.haxepunk.utils.Input;
 import com.haxepunk.utils.Key;
@@ -17,8 +18,9 @@ class Player extends Entity
 	
 	/*	This set of variables handles sound effects.
 	 */
-	private var sfxJump : Sfx;
-	private var sfxDeath : Sfx;
+	private var sfxJump : Sfx = new Sfx("audio/jump.wav");
+	private var sfxDeath : Sfx = new Sfx("audio/death.wav");	
+	private var gfxCircle : Graphic = Image.createCircle(20, 0xE0E0D0, 100); 
 	
 	/*	This set of variables describes player states.
 	 */
@@ -51,14 +53,14 @@ class Player extends Entity
 		acceleration = 0;
 		gravity = 12;
 		velocity = 0;
-		
+		/*
 		sfxJump = new Sfx( "audio/jump.wav" );
 		sfxDeath = new Sfx( "audio/death.wav" );
-		
+		*/
 		isDestroyed = false;
 		isReady = false;
 		
-		graphic = Image.createCircle( 20, 0xE0E0D0, 100 );
+		graphic = gfxCircle;
 		graphic.x = -20;
 		graphic.y = -20;
 		setHitbox( 30, 30, 15, 15 );
