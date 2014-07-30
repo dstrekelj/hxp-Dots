@@ -40,7 +40,7 @@ class Button extends Control {
 	public function new (label : String = "Button", x : Float = 0, y : Float = 0, ?alignment : Alignment = TOP_LEFT, ?newSize : Int = 16, ?width : Int = 0, ?height : Int = 0) : Void {
 		super(x, y, width, height);
 		
-		this.ID = label;
+		this.id = label;
 		this.alignment = alignment;
 		
 		_textOptions = {size : newSize};

@@ -33,11 +33,12 @@ class Control extends Entity implements IEventDispatcher {
 	public static inline var MOUSE_OVER	: String = "mouse_over";
 	public static inline var MOUSE_DOWN	: String = "mouse_down";
 	public static inline var MOUSE_UP	: String = "mouse_up";
+	public static inline var MOUSE_CLICK : String = "mouse_click";
 	
 	/** Control object ID, null if undefined. */	
-	@:isVar public var ID (get, set) : String;
-	private inline function get_ID () : String { return ID; }
-	private inline function set_ID (value : String) : String { return ID = value; }	
+	@:isVar public var id (get, set) : String;
+	private inline function get_id () : String { return id; }
+	private inline function set_id (value : String) : String { return id = value; }	
 	
 	/** Control object alignment. */
 	@:isVar public var alignment (get, set) : Alignment;
@@ -65,7 +66,7 @@ class Control extends Entity implements IEventDispatcher {
 		
 		this.type = "control";
 		
-		this.ID = null;
+		this.id = null;
 		setRoot(alignment);
 		
 		_eventDispatcher = new EventDispatcher();
@@ -77,6 +78,7 @@ class Control extends Entity implements IEventDispatcher {
 		if (HXP.stage != null) {
 			HXP.stage.addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
 			HXP.stage.addEventListener(MouseEvent.MOUSE_UP, onMouseUp);
+			HXP.stage.addEventListener(MouseEvent.CLICK, onMouseClick);
 		}
 	}
 	
@@ -84,7 +86,7 @@ class Control extends Entity implements IEventDispatcher {
 		super.update();
 		
 		if (collidePoint(x, y, Input.mouseX + HXP.camera.x, Input.mouseY + HXP.camera.y)) {
-			dispatchEvent(new CEvent(MOUSE_OVER, ID));
+			dispatchEvent(new CEvent(MOUSE_OVER, id));
 		}
 	}
 	
@@ -94,6 +96,7 @@ class Control extends Entity implements IEventDispatcher {
 		if (HXP.stage != null) {
 			HXP.stage.removeEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
 			HXP.stage.removeEventListener(MouseEvent.MOUSE_UP, onMouseUp);
+			HXP.stage.removeEventListener(MouseEvent.CLICK, onMouseClick);
 		}
 	}
 	
@@ -156,13 +159,19 @@ class Control extends Entity implements IEventDispatcher {
 	
 	private function onMouseDown (e : MouseEvent = null) : Void {
 		if (collidePoint(x, y, Input.mouseX + HXP.camera.x, Input.mouseY + HXP.camera.y)) {
-			dispatchEvent(new CEvent(MOUSE_DOWN, ID));
+			dispatchEvent(new CEvent(MOUSE_DOWN, id));
 		}
 	}
 	
 	private function onMouseUp (e : MouseEvent = null) : Void {
 		if (collidePoint(x, y, Input.mouseX + HXP.camera.x, Input.mouseY + HXP.camera.y)) {
-			dispatchEvent(new CEvent(MOUSE_UP, ID));
+			dispatchEvent(new CEvent(MOUSE_UP, id));
+		}
+	}
+	
+	private function onMouseClick (e : MouseEvent = null) : Void {
+		if (collidePoint(x, y, Input.mouseX + HXP.camera.x, Input.mouseY + HXP.camera.y)) {
+			dispatchEvent(new CEvent(MOUSE_CLICK, id));
 		}
 	}
 	

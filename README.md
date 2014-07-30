@@ -1,10 +1,9 @@
-# hxp-Dots
+# hxp-Dots v0.9.0
 
 ## About
-Leap across incoming dots to survive and attain the high score. Written in Haxe 3.1.1 using the HaxePunk 2.5.2 library.
+Leap across incoming dots to survive and attain the high score. Written in Haxe 3.1.1 using HaxePunk 2.5.2.
 
-Library versions are as follows:
-
+To play the game on Linux or Mac, compile the sources. Library versions are as follows:
 * haxelib_client: 3.1.0-rc.4
 * HaxePunk: 2.5.2
 * hxcpp: 3.1.30
@@ -21,10 +20,25 @@ Library versions are as follows:
 
 ## How to play
 
+### Controls
+
 **Desktop:** ENTER and ESC/BACKSPACE to navigate menus. UP/W/SPACE/ENTER/LEFT-CLICK to jump.
 **Android:** Touch the options to use them. Touch the screen to jump.
 
+### Rules
+
+* The player "dies" if he leaves the screen or collides with an obstacle.
+* The score is equal to the amount of time spent "alive", expressed in seconds.
+
 ## Version information
+
+**Version 0.9.0**
+* Code refactored
+* New version of hxp-GUI implemented
+* Fixed memory leak on Windows platform
+* Flash and HTML5 support introduced
+
+---
 
 **Version 0.8.0**
 * Positioning of UI significantly improved
