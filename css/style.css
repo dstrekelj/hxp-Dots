@@ -21,8 +21,7 @@ body
 	background:	url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAFklEQVQIW2NkYGD4D8SMQAwGcAbxAgBA6gEFaY6rgAAAAABJRU5ErkJggg==) repeat;
 	background-color: #1C1C1C;
 	
-	/*font-family: Futura, "Trebuchet MS", Arial, sans-serif;*/
-	font-family: Lato;
+	font-family: Lato, Open Sans, Roboto, "Trebuchet MS", Arial, sans-serif;
 	color: #ECECEC;
 	height: 100%;
 	
@@ -46,8 +45,7 @@ body p
 	min-height: 100%;
 	height: auto !important;
 	height: 100%;
-	
-	margin: 0 auto -1px;
+	margin: 0 auto -2.5em auto;
 	
 	overflow: hidden;
 }
@@ -93,7 +91,6 @@ hr.stop
 {
 	border: 0;
 	background-color: #313131;
-	margin: 0 auto;
 	width: 15%;
 	height: 2px;
 }

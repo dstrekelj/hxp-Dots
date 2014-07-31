@@ -8,14 +8,8 @@
 </head>
 <body>
 	<div id="wrapper">
-		<div id="header">
-		</div>
-		<!-- <div id="haxe:trace" style="position: absolute; z-index: 2147483647; display: none;" /> -->
-		<div id="haxe:openfl" style="background-color: #202020; width: 640px; height: 480px" />
-		<script>function winParameters () { return {}; }</script>
-		<script id="haxe:openfl:script" type="text/javascript" src="./Main.js"></script>
-		</div>
-		<div style="height: 480px">GAME GOES HERE</div>
+		<div id="header"></div>
+		<object id="game" width="640" height="480" data="game.html"></object>
 		<div id="text">
 			<h1>About TOCHKA</h1>
 			<hr class="left" />
@@ -26,7 +20,7 @@
 			<p><a href="https://github.com/dstrekelj/hxp-TOCHKA/releases">TOCHKA is available on Windows, Android, Flash and HTML5.</a></p>
 			<p>The Android version is currently only downloadable as an .apk. Sources should compile for Mac, Linux and iOS targets. Refer to library versions listed in the repository's readme document for more information.</p>
 		</div>
-		<div id="push" />
+		<div id="push"></div>
 	</div>
 	<div id="footer">
 		<hr class="stop" />
