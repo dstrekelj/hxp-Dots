@@ -1,3 +1,5 @@
+@import url(http://fonts.googleapis.com/css?family=Lato|Open+Sans|Roboto&subset=latin,latin-ext);
+
 @font-face {
     font-family: '04b03regular';
     src: url('04b_03__-webfont.eot');
@@ -16,13 +18,21 @@ html
 
 body
 {
+	background:	url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAFklEQVQIW2NkYGD4D8SMQAwGcAbxAgBA6gEFaY6rgAAAAABJRU5ErkJggg==) repeat;
 	background-color: #1C1C1C;
 	
-	font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+	/*font-family: Futura, "Trebuchet MS", Arial, sans-serif;*/
+	font-family: Lato;
 	color: #ECECEC;
 	height: 100%;
 	
 	margin: 0;
+}
+
+body p
+{
+	font-size: 0.8em;
+	text-align: justify;
 }
 
 #wrapper
@@ -54,32 +64,15 @@ body
 	padding: 8px 32px 8px 32px;
 }
 
-#text p
-{
-	font-size: 12pt;
-	text-align: justify;
-}
-
 #text h1
 {
 	position: relative;
 	font-family: '04b03regular', sans-serif;
 }
 
-#text a:link
-{
-	color: #44BBFF;
-}
-
-#text a:hover
-{
-	color: white;
-}
-
-#text a:visited
-{
-	color: #2299DD;
-}
+a:link {color: #44BBFF;}
+a:hover {color: white;}
+a:visited {color: #2299DD;}
 
 #text hr
 {
@@ -87,17 +80,33 @@ body
 	background-color: #44BBFF;
 	height: 2px;
 	width: 64px;
-	margin-top: -16px;
-}
-
-hr.left
-{
+	margin-top: -1em;
 	float: left;
 }
 
-.footer, .push
+#footer, #push
 {
-	height: 0.5em;
+	height: 2em;
+}
+
+hr.stop
+{
+	border: 0;
+	background-color: #313131;
+	margin: 0 auto;
+	width: 15%;
+	height: 2px;
+}
+
+#header
+{
+	padding-top: 0;
+	height: 4em;
+}
+
+#header p
+{
+	text-align: center;
 }
 
 /*
