@@ -9,13 +9,22 @@ import gui.*;
 
 class MainMenu extends Scene
 {
+	/** Determines spawn rate of obstacles in background. */
 	private static inline var _SPAWN_RATE : Float = 0.3;
 	
+	/** Label for game title. */
 	private var lTitle	: Label;
+	/** Label for subtitle. */
 	private var lMadeBy	: Label;
+	/** Start button. */
 	private var bStart	: Button;
+	/** Quit button.  */
 	private var bQuit	: Button;	
 	
+	/**
+	 * Constructor. Initializes GUI variables (labels, buttons) at specific positions
+	 * for mobile and non-mobile targets. Defines sets of keyboard inputs for navigation.
+	 */
 	public function new () : Void
 	{
 		super();
@@ -34,6 +43,10 @@ class MainMenu extends Scene
 		Input.define("exit", [Key.ESCAPE, Key.BACKSPACE]);
 	}
 	
+	/**
+	 * Called when scene is set to active scene. Adds GUI elements to scene and event
+	 * listeners for buttons. Omits "Quit" button from Flash and HTML5 targets.
+	 */
 	override public function begin () : Void
 	{
 		super.begin();
@@ -48,7 +61,12 @@ class MainMenu extends Scene
 #end
 	}
 	
+	/** Spawn timer. Counts elapsed time till it matches or exceeds _SPAWN_RATE. */
 	private var _spawnTimer : Float = 0;
+	/**
+	 * Updates scene state. Checks if defined inputs were pressed and acts on them if
+	 * they were. Populates background by spawning obstacle entities.
+	 */
 	override public function update () : Void
 	{
 		super.update();
@@ -69,10 +87,13 @@ class MainMenu extends Scene
 		{
 			create(entities.Obstacle, true).init();
 			_spawnTimer = 0;
-			//trace(HXP.round(flash.system.System.totalMemory / 1024 / 1024, 2));
 		}
 	}
 	
+	/**
+	 * Called when scene is no longer active scene. Removes all entities on scene
+	 * and event listeners from buttons.
+	 */
 	override public function end () : Void
 	{
 		super.end();
@@ -85,6 +106,7 @@ class MainMenu extends Scene
 #end
 	}
 	
+	/** Handles dispatched events from buttons and changes scenes accordingly. */
 	private function sceneHandler (e : CEvent) : Void
 	{
 		switch(e.senderID)

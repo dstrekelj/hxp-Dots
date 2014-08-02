@@ -13,22 +13,22 @@ class Player extends Entity
 	private var _setX : Float = 100;
 	/** Y position passed to constructor, stored for reference. */
 	private var _setY : Float = HXP.halfHeight;
-	
 	/** Maximum velocity of player entity (in free fall). */
 	private var _gravity : Float = 12;
 	/** Takeoff velocity of player entity (from jumping). */
 	private var _takeoff : Float = 8;
 	/** Velocity of player entity. */
 	private var _velocity : Float = 0;
-	
+	/** Jump sound effect. */
 	private var sfxJump : Sfx = new Sfx("audio/jump.wav");
+	/** Collision ('death') sound effect. */
 	private var sfxDeath : Sfx = new Sfx("audio/death.wav");
-	
 	/** Is the player ready to play? */
 	public var isReady (default, null) : Bool;
 	/** Is the player alive? */
 	public var isAlive (default, null) : Bool;
 	
+	/** Constructor. Creates Player entity with circle graphic, rendered at layer 1. */
 	public function new () : Void
 	{
 		super();
@@ -42,6 +42,10 @@ class Player extends Entity
 		layer = 1;
 	}
 	
+	/**
+	 * Called when Player entity is added to scene. Defines input keys for jumping.
+	 * Calls init() to initialize parameters.
+	 */
 	override public function added () : Void
 	{
 		super.added();
@@ -51,6 +55,11 @@ class Player extends Entity
 		init();
 	}
 	
+	/**
+	 * If player is ready to play and alive, move player entity. If colliding
+	 * with Obstacle entity, call destroy(). If outside of screen, call destroy().
+	 * Handle movement and play sound effect accordingly.
+	 */
 	override public function update () : Void
 	{
 		super.update();
@@ -93,6 +102,7 @@ class Player extends Entity
 		}
 	}
 	
+	/** Called when Player entity is destroyed. Sets parameters, plays death sound. */
 	public function destroy () : Void
 	{		
 		visible = false;
@@ -102,6 +112,7 @@ class Player extends Entity
 		sfxDeath.play(0.6, 0, false);
 	}
 	
+	/** Initializes Player entity parameters. */
 	public function init () : Void
 	{
 		x = _setX;

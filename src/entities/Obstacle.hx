@@ -11,10 +11,10 @@ class Obstacle extends Entity
 	private static inline var velocity : Float = 7.0;
 	/** Random factor used to achieve variations in velocity between existing entities. */
 	private var vFactor : Float;
-	
+	/** Is the obstacle entity visible on screen? */
 	public static var isOnCamera (default, null) : Bool;
 	
-	/** Constructor. Creates Obstacle object with circle graphic, rendered at layer 1. */
+	/** Constructor. Creates Obstacle entity with circle graphic, rendered at layer 1. */
 	public function new () : Void
 	{
 		super();
