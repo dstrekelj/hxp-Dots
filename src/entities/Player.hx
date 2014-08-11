@@ -9,9 +9,9 @@ import com.haxepunk.utils.Key;
 
 class Player extends Entity
 {	
-	/** X position passed to constructor, stored for reference. */
+	/** X position. */
 	private var _setX : Float = 100;
-	/** Y position passed to constructor, stored for reference. */
+	/** Y position. */
 	private var _setY : Float = HXP.halfHeight;
 	/** Maximum velocity of player entity (in free fall). */
 	private var _gravity : Float = 12;
@@ -76,7 +76,7 @@ class Player extends Entity
 				destroy();
 			}
 			
-			var e : Entity = collide("obstacle", x, y);
+			var e : Entity = collide("obstacle", x+32, bottom);
 			if (e != null)
 			{
 				var o : Obstacle = cast(e, Obstacle);
