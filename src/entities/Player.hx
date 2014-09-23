@@ -20,9 +20,9 @@ class Player extends Entity
 	/** Velocity of player entity. */
 	private var _velocity : Float = 0;
 	/** Jump sound effect. */
-	private var sfxJump : Sfx = new Sfx("audio/jump.wav");
+	private var sfxJump : Sfx;
 	/** Collision ('death') sound effect. */
-	private var sfxDeath : Sfx = new Sfx("audio/death.wav");
+	private var sfxDeath : Sfx;
 	/** Is the player ready to play? */
 	public var isReady (default, null) : Bool;
 	/** Is the player alive? */
@@ -40,6 +40,11 @@ class Player extends Entity
 		type = "player";
 		
 		layer = 1;
+		
+		/** Jump sound effect. */
+		sfxJump = new Sfx("audio/jump.wav");
+		/** Collision ('death') sound effect. */
+		sfxDeath = new Sfx("audio/death.wav");
 	}
 	
 	/**
